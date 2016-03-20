@@ -13,20 +13,28 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   api.use([
-    'check',
-    'underscore',
     'reactive-var',
-    'templating',
     'aldeed:autoform',
     'fortawesome:fontawesome',
     'cfs:ui',
     'es5-shim',
-    'ecmascript'
+  ], 'client');
+
+  api.use([
+    'underscore',
+    'ecmascript',
+    'templating'
   ]);
 
-  api.addFiles('client/autoform-upload.js');
-  api.addFiles('client/autoform-upload.html');
-  api.addFiles('client/autoform-upload.css');
+  api.use([
+    'check',
+  ], 'server');
 
-  api.addFiles('server/autoform-upload.js');
+  api.addFiles('client/autoform-upload.html', 'client');
+  api.addFiles('client/autoform-upload.js', 'client');
+  api.addFiles('client/autoform-upload.css', 'client');
+
+  api.addFiles('server/autoform-upload.js', 'server');
+
+  api.addAssets('public/img/image.png', 'client');
 });

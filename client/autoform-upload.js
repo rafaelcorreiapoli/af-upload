@@ -78,7 +78,7 @@ Template.afUpload.helpers({
     }
 
 
-    return '/img/image.png';
+    return '/packages/rafa93br_autoform-upload/public/img/image.png';
   },
   schemaKey() {
     return  this.atts['data-schema-key'];
