@@ -1,0 +1,47 @@
+<template name="afUpload">
+  <div style="width: 200px; display:inline-block">
+    <div>
+      <img src="{{imagePreview}}" style="width: 200px; height: auto" />
+      <input type="hidden" value="{{file}}" data-schema-key="{{schemaKey}}">
+    </div>
+    <div>
+      {{#unless file}}
+        <!-- No File Selected -->
+        {{#unless insertStarted}}
+          <button class="btn btn-default" id='trigger-file'>
+            Choose File
+          </button>    
+        {{else}}
+          <!-- Calling method -->
+          <i class="fa fa-spinner fa-spin"></i> Contacting server...
+        {{/unless}}
+        <input type="file" class="hidden-upload" id="input-file" accept="*" />
+
+      {{else}}
+        <!--File Selected -->
+        {{#if subsReady}}
+          <!-- Is subscribed -->
+          {{#with fileInstance}}
+            {{#if isUploaded}} 
+              <!-- Upload Finished -->
+              {{#if isStored}}
+                <!-- Storing finished -->
+                <button class="btn btn-danger" id="remove">Remove</button>
+              {{else}}
+                <!-- Is storing... -->
+                <i class="fa fa-spinner fa-spin"></i> Storing...
+              {{/if}}
+            {{else}} 
+              <!-- Is uploading... -->
+              {{> FS.UploadProgressBar bootstrap=true class='progress-bar-success progress-bar-striped active' showPercent=true}}
+            {{/if}}
+          {{/with}}
+        {{else}}
+          <!-- Subscribing... -->
+          <i class="fa fa-spinner fa-spin"></i> Getting data...
+        {{/if}}
+      {{/unless}}
+
+    </div>
+  </div>
+</template>
