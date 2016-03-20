@@ -36,6 +36,11 @@ Template.afUpload.events({
   },
   'click #remove': function(e, t) {
     e.preventDefault();
+
+    Images.remove({
+      _id: t.file.get()
+    });
+
     t.file.set(null);
     t.error.set(null);
     t.localImage.set(null);
